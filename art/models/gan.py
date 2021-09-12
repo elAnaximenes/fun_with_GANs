@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 import time
 from tensorflow.keras import layers
+import matplotlib.pyplot as plt
 
 class Discriminator(tf.keras.Model):
 
@@ -21,12 +22,12 @@ class Discriminator(tf.keras.Model):
         self.dropoutLayer2 = layers.Dropout(0.3)
 
         self.flattenLayer = layers.Flatten()
-        self.output = layers.Dense(1)
+        self.outputLayer = layers.Dense(1)
 
         self.cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         self.optimizer = tf.keras.optimizers.Adam(1e-4)
 
-    def call(x):
+    def call(self, x):
 
         x = self.inputLayer(x)
         x = self.convLayer1(x)
@@ -35,11 +36,11 @@ class Discriminator(tf.keras.Model):
         x = self.convLayer2(x)
         x = self.reluLayer2(x)
         x = self.dropoutLayer2(x)
-        x = self.flattenLayer(1)
+        x = self.flattenLayer(x)
 
-        return self.output(x)
+        return self.outputLayer(x)
 
-    def loss(real_output, fake_output):
+    def loss(self, real_output, fake_output):
 
         real_loss = self.cross_entropy(tf.ones_like(real_output), real_output)
         fake_loss = self.cross_entropy(tf.zeros_like(fake_output), fake_output)
@@ -51,22 +52,22 @@ class Generator(tf.keras.Model):
 
     def __init__(self, inputShape): 
 
-        super(Discriminator, self).__init__()
+        super(Generator, self).__init__()
 
         self.inputLayer = layers.InputLayer(inputShape)
         self.dense = layers.Dense(7*7*256, use_bias=False, input_shape=(100,))
 
         self.batchNormLayer1 = layers.BatchNormalization()
-        self.reluLayer1 = layers.leakyReLU()
+        self.reluLayer1 = layers.LeakyReLU()
         self.reshape1 = layers.Reshape((7,7,256))
         self.convLayer1 = layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False)
 
         self.batchNormLayer2 = layers.BatchNormalization()
-        self.reluLayer2 = layers.leakyReLU()
+        self.reluLayer2 = layers.LeakyReLU()
         self.convLayer2 = layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False)
 
         self.batchNormLayer3 = layers.BatchNormalization()
-        self.reluLayer3 = layers.leakyReLU()
+        self.reluLayer3 = layers.LeakyReLU()
 
         self.convLayer3 = layers.Conv2DTranspose(1, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation='tanh')
 
@@ -74,23 +75,23 @@ class Generator(tf.keras.Model):
         self.cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         self.optimizer = tf.keras.optimizers.Adam(1e-4)
 
-    def call(x):
+    def call(self, x, training=False):
 
         x = self.inputLayer(x)
         x = self.dense(x)
-        x = self.batchNormLayer1(x) 
+        x = self.batchNormLayer1(x, training=training) 
         x = self.reluLayer1(x)
         x = self.reshape1(x)
         x = self.convLayer1(x)
-        x = sefl.batchNormLayer2(x)
-        x = sefl.reluLayer2(x)
-        x = sefl.convLayer2(x)
-        x = sefl.batchNormLayer3(x)
-        x = sefl.reluLayer3(x)
+        x = self.batchNormLayer2(x, training=training)
+        x = self.reluLayer2(x)
+        x = self.convLayer2(x)
+        x = self.batchNormLayer3(x, training=training)
+        x = self.reluLayer3(x)
 
-        return sefl.convLayer3(x)
+        return self.convLayer3(x)
 
-    def loss(fake_output):
+    def loss(self, fake_output):
 
         return self.cross_entropy(tf.ones_like(fake_output), fake_output)
 
@@ -103,13 +104,13 @@ class GAN:
 
         self.noiseDim = 100
         self.numSamplesToGenerate = 16
-        self.seed = tf.random.normal([num_examples_to_generate, noise_dim])
-        self.batchSize = 256 
+        self.seed = tf.random.normal([self.numSamplesToGenerate, self.noiseDim])
+        self.batchSize = 16 
         self.epochs = 10
 
     def _generate_images(self, epoch, testInput):
 
-        predictions = self.generator(testInput, training=False)
+        predictions = self.generator(testInput)
 
         fig = plt.figure(figsize=(4,4))
 
@@ -129,8 +130,8 @@ class GAN:
 
             generatedImages = self.generator(noise, training=True)
 
-            realOutput = self.discriminator(images, training=True)
-            fakeOutput = self.discriminator(generatedImages, training=True)
+            realOutput = self.discriminator(images)
+            fakeOutput = self.discriminator(generatedImages)
 
             genLoss = self.generator.loss(fakeOutput)
             discLoss = self.discriminator.loss(realOutput, fakeOutput)
@@ -154,13 +155,3 @@ class GAN:
             self._generate_images(epoch + 1, self.seed)
 
         self._generate_images(self.epochs, self.seed)
-
-        
-
-
-
-
-
-
-
-

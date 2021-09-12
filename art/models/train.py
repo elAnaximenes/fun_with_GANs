@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import PIL
+import tensorflow as tf
 from tensorflow.keras import layers
 import time
 
@@ -15,3 +16,12 @@ BUFFER_SIZE = 60000
 BATCH_SIZE = 256
 # Batch and shuffle the data
 train_dataset = tf.data.Dataset.from_tensor_slices(train_images).shuffle(BUFFER_SIZE).batch(BATCH_SIZE)
+
+inputShape = train_images.shape[1:]
+
+discriminator = gan.Discriminator(inputShape)
+generator = gan.Generator(inputShape)
+gan = gan.GAN(generator, discriminator)
+
+gan.train(train_dataset)
+
