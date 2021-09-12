@@ -25,6 +25,11 @@ class Generator(tf.keras.Model):
 
         self.convLayer3 = layers.Conv2DTranspose(1, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation='tanh')
 
+
+        self.cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+        self.optimizer = tf.keras.optimizers.Adam(1e-4)
+
+
     def call(x):
 
         x = self.inputLayer(x)
@@ -41,6 +46,9 @@ class Generator(tf.keras.Model):
 
         return sefl.convLayer3(x)
 
+    def generator_loss(fake_output):
+
+        return self.cross_entropy(tf.ones_like(fake_output), fake_output)
 
 
 

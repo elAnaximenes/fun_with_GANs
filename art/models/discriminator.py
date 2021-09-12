@@ -23,6 +23,9 @@ class Discriminator(tf.keras.Model):
         self.flattenLayer = layers.Flatten()
         self.output = layers.Dense(1)
 
+        self.cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+        self.optimizer = tf.keras.optimizers.Adam(1e-4)
+
     def call(x):
 
         x = self.inputLayer(x)
@@ -35,6 +38,16 @@ class Discriminator(tf.keras.Model):
         x = self.flattenLayer(1)
 
         return self.output(x)
+
+    def discriminator_loss(real_output, fake_output):
+
+        real_loss = self.cross_entropy(tf.ones_like(real_output), real_output)
+        fake_loss = self.cross_entropy(tf.zeros_like(fake_output), fake_output)
+        total_loss = real_loss + fake_loss
+
+        return total_loss
+
+
 
 if __name__ == "__main__":
 
