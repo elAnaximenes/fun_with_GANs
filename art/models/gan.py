@@ -12,12 +12,12 @@ class Discriminator(tf.keras.Model):
 
         self.inputLayer = layers.InputLayer(inputShape)
 
-        self.convLayer1 = layers.Conv2D(4, (5,5), strides=(2,2), padding='same')
+        self.convLayer1 = layers.Conv2D(32, (5,5), strides=(2,2), padding='same')
 
         self.reluLayer1 = layers.LeakyReLU()
         self.dropoutLayer1 = layers.Dropout(0.3)
 
-        self.convLayer2 = layers.Conv2D(8, (5,5), strides=(2,2), padding='same')
+        self.convLayer2 = layers.Conv2D(64, (5,5), strides=(2,2), padding='same')
         self.reluLayer2 = layers.LeakyReLU()
         self.dropoutLayer2 = layers.Dropout(0.3)
 
@@ -62,11 +62,11 @@ class Generator(tf.keras.Model):
         self.batchNormLayer1 = layers.BatchNormalization()
         self.reluLayer1 = layers.LeakyReLU()
         self.reshape1 = layers.Reshape((50, 50, 3))
-        self.convLayer1 = layers.Conv2DTranspose(32, (5, 5), strides=(1, 1), padding='same', use_bias=False)
+        self.convLayer1 = layers.Conv2DTranspose(64, (5, 5), strides=(1, 1), padding='same', use_bias=False)
 
         self.batchNormLayer2 = layers.BatchNormalization()
         self.reluLayer2 = layers.LeakyReLU()
-        self.convLayer2 = layers.Conv2DTranspose(16, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        self.convLayer2 = layers.Conv2DTranspose(32, (5, 5), strides=(2, 2), padding='same', use_bias=False)
 
         self.batchNormLayer3 = layers.BatchNormalization()
         self.reluLayer3 = layers.LeakyReLU()
@@ -113,6 +113,11 @@ class GAN:
         self.seed = tf.random.normal([self.numSamplesToGenerate, 100])
         self.batchSize = 16 
         self.epochs = 10000 
+
+        self.checkpoint = tf.train.Checkpoint(generator_optimizer=self.generator.optimizer,
+                                                discriminator_optimizer=self.discriminator.optimizer,
+                                                generator=self.generator,
+                                                discriminator=self.discriminator)
 
     def _generate_images(self, epoch):
 
@@ -167,5 +172,6 @@ class GAN:
 
             if epoch %100 == 0:
                 self._generate_images(epoch + 1)
+                self.checkpoint.save('./checkpoints/')
 
         self._generate_images(self.epochs)

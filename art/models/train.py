@@ -33,10 +33,9 @@ def convert_row_to_image_data(row):
 
     image = np.array(image).reshape((200,200,3))
 
-    fig = plt.figure()
-    plt.imshow(image)
-    plt.show()
-
+    #fig = plt.figure()
+    #plt.imshow(image)
+    #plt.show()
 
     return image
 
