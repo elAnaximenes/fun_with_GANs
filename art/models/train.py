@@ -33,6 +33,11 @@ def convert_row_to_image_data(row):
 
     image = np.array(image).reshape((200,200,3))
 
+    fig = plt.figure()
+    plt.imshow(image)
+    plt.show()
+
+
     return image
 
 def get_artist_paintings(artistName):
@@ -54,8 +59,8 @@ def get_artist_paintings(artistName):
 
             image = convert_row_to_image_data(row) 
             images.append(image)
-            if imgNum == 16:
-                break
+            #if imgNum == 16:
+                #break
 
     return np.array(images)
 
@@ -85,6 +90,6 @@ def main(artistName):
 
 if __name__ == '__main__':
 
-    artistName = 'Michelangelo'
+    artistName = 'Vincent_van_Gogh'
     main(artistName)
 
