@@ -12,12 +12,12 @@ class Discriminator(tf.keras.Model):
 
         self.inputLayer = layers.InputLayer(inputShape)
 
-        self.convLayer1 = layers.Conv2D(32, (5,5), strides=(2,2), padding='same')
+        self.convLayer1 = layers.Conv2D(64, (5,5), strides=(2,2), padding='same')
 
         self.reluLayer1 = layers.LeakyReLU()
         self.dropoutLayer1 = layers.Dropout(0.3)
 
-        self.convLayer2 = layers.Conv2D(64, (5,5), strides=(2,2), padding='same')
+        self.convLayer2 = layers.Conv2D(128, (5,5), strides=(2,2), padding='same')
         self.reluLayer2 = layers.LeakyReLU()
         self.dropoutLayer2 = layers.Dropout(0.3)
 
@@ -62,11 +62,11 @@ class Generator(tf.keras.Model):
         self.batchNormLayer1 = layers.BatchNormalization()
         self.reluLayer1 = layers.LeakyReLU()
         self.reshape1 = layers.Reshape((50, 50, 3))
-        self.convLayer1 = layers.Conv2DTranspose(64, (5, 5), strides=(1, 1), padding='same', use_bias=False)
+        self.convLayer1 = layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False)
 
         self.batchNormLayer2 = layers.BatchNormalization()
         self.reluLayer2 = layers.LeakyReLU()
-        self.convLayer2 = layers.Conv2DTranspose(32, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        self.convLayer2 = layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False)
 
         self.batchNormLayer3 = layers.BatchNormalization()
         self.reluLayer3 = layers.LeakyReLU()
