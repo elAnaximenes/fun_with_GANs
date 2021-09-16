@@ -130,5 +130,5 @@ dmypy.json
 
 
 *.jpg
-art/data/
+art/data/datasets
 art/models/checkpoints

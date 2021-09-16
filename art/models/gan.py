@@ -13,13 +13,16 @@ class Discriminator(tf.keras.Model):
         self.inputLayer = layers.InputLayer(inputShape)
 
         self.convLayer1 = layers.Conv2D(64, (5,5), strides=(2,2), padding='same')
-
         self.reluLayer1 = layers.LeakyReLU()
         self.dropoutLayer1 = layers.Dropout(0.3)
 
         self.convLayer2 = layers.Conv2D(128, (5,5), strides=(2,2), padding='same')
         self.reluLayer2 = layers.LeakyReLU()
         self.dropoutLayer2 = layers.Dropout(0.3)
+
+        self.convLayer3 = layers.Conv2D(256, (5,5), strides=(2,2), padding='same')
+        self.reluLayer3 = layers.LeakyReLU()
+        self.dropoutLayer3 = layers.Dropout(0.3)
 
         self.flattenLayer = layers.Flatten()
         self.outputLayer = layers.Dense(1)
@@ -38,6 +41,9 @@ class Discriminator(tf.keras.Model):
         x = self.convLayer2(x)
         x = self.reluLayer2(x)
         x = self.dropoutLayer2(x)
+        x = self.convLayer3(x)
+        x = self.reluLayer3(x)
+        x = self.dropoutLayer3(x)
         x = self.flattenLayer(x)
 
         return self.outputLayer(x)
@@ -57,11 +63,11 @@ class Generator(tf.keras.Model):
         super(Generator, self).__init__()
 
         self.inputLayer = layers.InputLayer(inputShape)
-        self.dense = layers.Dense(50*50*3, use_bias=False)
+        self.dense = layers.Dense(25*25*3, use_bias=False)
 
         self.batchNormLayer1 = layers.BatchNormalization()
         self.reluLayer1 = layers.LeakyReLU()
-        self.reshape1 = layers.Reshape((50, 50, 3))
+        self.reshape1 = layers.Reshape((25, 25, 3))
         self.convLayer1 = layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False)
 
         self.batchNormLayer2 = layers.BatchNormalization()
@@ -70,8 +76,11 @@ class Generator(tf.keras.Model):
 
         self.batchNormLayer3 = layers.BatchNormalization()
         self.reluLayer3 = layers.LeakyReLU()
-
-        self.convLayer3 = layers.Conv2DTranspose(3, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation='tanh')
+        self.convLayer3 = layers.Conv2DTranspose(32, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        
+        self.batchNormLayer4 = layers.BatchNormalization()
+        self.reluLayer4 = layers.LeakyReLU()
+        self.convLayer4 = layers.Conv2DTranspose(3, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation='tanh')
 
         self.cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         self.optimizer = tf.keras.optimizers.Adam(1e-4)
@@ -92,6 +101,9 @@ class Generator(tf.keras.Model):
         x = self.batchNormLayer3(x, training=training)
         x = self.reluLayer3(x)
         x = self.convLayer3(x)
+        x = self.batchNormLayer4(x, training=training)
+        x = self.reluLayer4(x)
+        x = self.convLayer4(x)
 
         return x
 
@@ -149,14 +161,15 @@ class GAN:
             genLoss = self.generator.loss(fakeOutput)
             discLoss = self.discriminator.loss(realOutput, fakeOutput)
 
-            print('generator loss', genLoss)
-            print('discriminator loss', discLoss, flush=True)
+
 
         generatorGrads = genTape.gradient(genLoss, self.generator.trainable_variables)
         discriminatorGrads = discTape.gradient(discLoss, self.discriminator.trainable_variables)
 
         self.generator.optimizer.apply_gradients(zip(generatorGrads, self.generator.trainable_variables))
         self.discriminator.optimizer.apply_gradients(zip(discriminatorGrads, self.discriminator.trainable_variables))
+
+        return genLoss, discLoss
 
     def train(self, dataset):
 
@@ -168,10 +181,13 @@ class GAN:
 
             for imageBatch in dataset:
 
-                self._train_step(imageBatch)
+                genLoss, discLoss = self._train_step(imageBatch)
 
-            if epoch %100 == 0:
+            if epoch %20 == 0:
                 self._generate_images(epoch + 1)
                 self.checkpoint.save('./checkpoints/')
+
+            print('generator loss', genLoss)
+            print('discriminator loss', discLoss, flush=True)
 
         self._generate_images(self.epochs)
