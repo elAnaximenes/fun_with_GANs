@@ -173,6 +173,9 @@ class GAN:
 
     def train(self, dataset):
 
+        checkpointDir = './checkpoints/'
+        self.checkpoint.restore(tf.train.latest_checkpoint(checkpointDir))
+
         for epoch in range(self.epochs):
 
             print('Epoch Number {}'.format(epoch))
@@ -183,7 +186,7 @@ class GAN:
 
                 genLoss, discLoss = self._train_step(imageBatch)
 
-            if epoch %20 == 0:
+            if epoch %10 == 0:
                 self._generate_images(epoch + 1)
                 self.checkpoint.save('./checkpoints/')
 

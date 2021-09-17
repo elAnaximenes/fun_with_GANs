@@ -9,10 +9,7 @@ def save_dataset_to_csv(dataset, artistName=None):
 
     print("writing outfile", flush=True)
 
-    if not os.path.exists("./artists/"):
-        os.mkdir("./artists/")
-
-    outFileName = "./artists/{}.csv".format(artistName)
+    outFileName = "./{}.csv".format(artistName)
 
     with open(outFileName, 'w') as f:
 
@@ -40,6 +37,25 @@ def get_image_encoding(imageName):
         data = (data - 127.5) / 127.5
 
     return data
+
+def get_portrait_dataset(portraitFolder, images):
+
+    print("reading portrait dataset...", flush=True)
+    dataset = []
+
+    for imageName in images:
+
+        imageName = os.path.join(portraitFolder, imageName)
+        data = get_image_encoding(imageName)
+
+        if data is not None:
+            dataset.append(data)
+
+    dataset = np.array(dataset)
+
+    save_dataset_to_csv(dataset, 'portrait faces')
+
+    return dataset
 
 def get_artist_dataset(artistFolder, images):
 
@@ -75,5 +91,7 @@ def extract_image_data():
     for artist in artists:
 
         extract_artist(artist, imagesDir)
-
-extract_image_data()
+        
+portraitDir = './datasets/portrait_faces/'
+portraits = os.listdir(portraitDir)
+get_portrait_dataset(portraitDir, portraits)

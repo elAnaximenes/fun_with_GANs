@@ -33,15 +33,17 @@ def convert_row_to_image_data(row):
 
     image = np.array(image).reshape((200,200,3))
 
-    #fig = plt.figure()
-    #plt.imshow(image)
-    #plt.show()
+    """
+    fig = plt.figure()
+    plt.imshow(image)
+    plt.show()
+    """
 
     return image
 
 def get_artist_paintings(artistName):
 
-    paintingsFileName = os.path.join('../data/artists/', '{}.csv'.format(artistName))
+    paintingsFileName = os.path.join('../data/', '{}.csv'.format(artistName))
     print('reading artist paintings {}'.format(artistName), flush=True)
 
     images = []
@@ -89,6 +91,6 @@ def main(artistName):
 
 if __name__ == '__main__':
 
-    artistName = 'Vincent_van_Gogh'
+    artistName = 'portrait_faces'
     main(artistName)
 
