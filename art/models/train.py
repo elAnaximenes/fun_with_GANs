@@ -31,7 +31,7 @@ def convert_row_to_image_data(row):
             else:
                 pixelValue += char
 
-    image = np.array(image).reshape((200,200,3))
+    image = np.array(image).reshape((256,256,3))
 
     """
     fig = plt.figure()

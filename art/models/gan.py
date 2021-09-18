@@ -12,17 +12,21 @@ class Discriminator(tf.keras.Model):
 
         self.inputLayer = layers.InputLayer(inputShape)
 
-        self.convLayer1 = layers.Conv2D(64, (5,5), strides=(2,2), padding='same')
+        self.convLayer1 = layers.Conv2D(32, (5,5), strides=(2,2), padding='same')
         self.reluLayer1 = layers.LeakyReLU()
         self.dropoutLayer1 = layers.Dropout(0.3)
 
-        self.convLayer2 = layers.Conv2D(128, (5,5), strides=(2,2), padding='same')
+        self.convLayer2 = layers.Conv2D(64, (5,5), strides=(2,2), padding='same')
         self.reluLayer2 = layers.LeakyReLU()
         self.dropoutLayer2 = layers.Dropout(0.3)
 
-        self.convLayer3 = layers.Conv2D(256, (5,5), strides=(2,2), padding='same')
+        self.convLayer3 = layers.Conv2D(128, (5,5), strides=(2,2), padding='same')
         self.reluLayer3 = layers.LeakyReLU()
         self.dropoutLayer3 = layers.Dropout(0.3)
+
+        self.convLayer4 = layers.Conv2D(256, (5,5), strides=(2,2), padding='same')
+        self.reluLayer4 = layers.LeakyReLU()
+        self.dropoutLayer4 = layers.Dropout(0.3)
 
         self.flattenLayer = layers.Flatten()
         self.outputLayer = layers.Dense(1)
@@ -44,6 +48,9 @@ class Discriminator(tf.keras.Model):
         x = self.convLayer3(x)
         x = self.reluLayer3(x)
         x = self.dropoutLayer3(x)
+        x = self.convLayer4(x)
+        x = self.reluLayer4(x)
+        x = self.dropoutLayer4(x)
         x = self.flattenLayer(x)
 
         return self.outputLayer(x)
@@ -63,11 +70,11 @@ class Generator(tf.keras.Model):
         super(Generator, self).__init__()
 
         self.inputLayer = layers.InputLayer(inputShape)
-        self.dense = layers.Dense(25*25*3, use_bias=False)
+        self.dense = layers.Dense(32*32*3, use_bias=False)
 
         self.batchNormLayer1 = layers.BatchNormalization()
         self.reluLayer1 = layers.LeakyReLU()
-        self.reshape1 = layers.Reshape((25, 25, 3))
+        self.reshape1 = layers.Reshape((32, 32, 3))
         self.convLayer1 = layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False)
 
         self.batchNormLayer2 = layers.BatchNormalization()
@@ -173,8 +180,8 @@ class GAN:
 
     def train(self, dataset):
 
-        checkpointDir = './checkpoints/'
-        self.checkpoint.restore(tf.train.latest_checkpoint(checkpointDir))
+        #checkpointDir = './checkpoints/'
+        #self.checkpoint.restore(tf.train.latest_checkpoint(checkpointDir))
 
         for epoch in range(self.epochs):
 
@@ -186,8 +193,9 @@ class GAN:
 
                 genLoss, discLoss = self._train_step(imageBatch)
 
+            self._generate_images(epoch + 1)
             if epoch %10 == 0:
-                self._generate_images(epoch + 1)
+
                 self.checkpoint.save('./checkpoints/')
 
             print('generator loss', genLoss)

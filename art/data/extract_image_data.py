@@ -24,7 +24,7 @@ def get_image_encoding(imageName):
 
     with Image.open(imageName) as img:
 
-        img = img.resize((200,200))
+        img = img.resize((256,256))
 
         if img.mode == "L":
             print("grayscale image:", img.mode)
