@@ -70,24 +70,28 @@ class Generator(tf.keras.Model):
         super(Generator, self).__init__()
 
         self.inputLayer = layers.InputLayer(inputShape)
-        self.dense = layers.Dense(32*32*3, use_bias=False)
+        self.dense = layers.Dense(16*16*3, use_bias=False)
 
         self.batchNormLayer1 = layers.BatchNormalization()
         self.reluLayer1 = layers.LeakyReLU()
-        self.reshape1 = layers.Reshape((32, 32, 3))
-        self.convLayer1 = layers.Conv2DTranspose(128, (5, 5), strides=(1, 1), padding='same', use_bias=False)
+        self.reshape1 = layers.Reshape((16, 16, 3))
+        self.convLayer1 = layers.Conv2DTranspose(256, (5, 5), strides=(1, 1), padding='same', use_bias=False)
 
         self.batchNormLayer2 = layers.BatchNormalization()
         self.reluLayer2 = layers.LeakyReLU()
-        self.convLayer2 = layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        self.convLayer2 = layers.Conv2DTranspose(128, (5, 5), strides=(2, 2), padding='same', use_bias=False)
 
         self.batchNormLayer3 = layers.BatchNormalization()
         self.reluLayer3 = layers.LeakyReLU()
-        self.convLayer3 = layers.Conv2DTranspose(32, (5, 5), strides=(2, 2), padding='same', use_bias=False)
-        
+        self.convLayer3 = layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+
         self.batchNormLayer4 = layers.BatchNormalization()
         self.reluLayer4 = layers.LeakyReLU()
-        self.convLayer4 = layers.Conv2DTranspose(3, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation='tanh')
+        self.convLayer4 = layers.Conv2DTranspose(32, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        
+        self.batchNormLayer5 = layers.BatchNormalization()
+        self.reluLayer5 = layers.LeakyReLU()
+        self.convLayer5 = layers.Conv2DTranspose(3, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation='tanh')
 
         self.cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         self.optimizer = tf.keras.optimizers.Adam(1e-4)
@@ -111,6 +115,9 @@ class Generator(tf.keras.Model):
         x = self.batchNormLayer4(x, training=training)
         x = self.reluLayer4(x)
         x = self.convLayer4(x)
+        x = self.batchNormLayer5(x, training=training)
+        x = self.reluLayer5(x)
+        x = self.convLayer5(x)
 
         return x
 
