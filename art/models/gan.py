@@ -187,10 +187,10 @@ class GAN:
 
     def train(self, dataset):
 
-        #checkpointDir = './checkpoints/'
-        #self.checkpoint.restore(tf.train.latest_checkpoint(checkpointDir))
+        checkpointDir = './checkpoints/'
+        self.checkpoint.restore(tf.train.latest_checkpoint(checkpointDir))
 
-        for epoch in range(self.epochs):
+        for epoch in range(141, self.epochs):
 
             print('Epoch Number {}'.format(epoch))
 
