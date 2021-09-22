@@ -75,19 +75,19 @@ class Generator(tf.keras.Model):
         self.batchNormLayer1 = layers.BatchNormalization()
         self.reluLayer1 = layers.LeakyReLU()
         self.reshape1 = layers.Reshape((16, 16, 3))
-        self.convLayer1 = layers.Conv2DTranspose(256, (5, 5), strides=(1, 1), padding='same', use_bias=False)
+        self.convLayer1 = layers.Conv2DTranspose(512, (5, 5), strides=(1, 1), padding='same', use_bias=False)
 
         self.batchNormLayer2 = layers.BatchNormalization()
         self.reluLayer2 = layers.LeakyReLU()
-        self.convLayer2 = layers.Conv2DTranspose(128, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        self.convLayer2 = layers.Conv2DTranspose(256, (5, 5), strides=(2, 2), padding='same', use_bias=False)
 
         self.batchNormLayer3 = layers.BatchNormalization()
         self.reluLayer3 = layers.LeakyReLU()
-        self.convLayer3 = layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        self.convLayer3 = layers.Conv2DTranspose(128, (5, 5), strides=(2, 2), padding='same', use_bias=False)
 
         self.batchNormLayer4 = layers.BatchNormalization()
         self.reluLayer4 = layers.LeakyReLU()
-        self.convLayer4 = layers.Conv2DTranspose(32, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        self.convLayer4 = layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False)
         
         self.batchNormLayer5 = layers.BatchNormalization()
         self.reluLayer5 = layers.LeakyReLU()
@@ -175,8 +175,6 @@ class GAN:
             genLoss = self.generator.loss(fakeOutput)
             discLoss = self.discriminator.loss(realOutput, fakeOutput)
 
-
-
         generatorGrads = genTape.gradient(genLoss, self.generator.trainable_variables)
         discriminatorGrads = discTape.gradient(discLoss, self.discriminator.trainable_variables)
 
@@ -188,9 +186,9 @@ class GAN:
     def train(self, dataset):
 
         checkpointDir = './checkpoints/'
-        self.checkpoint.restore(tf.train.latest_checkpoint(checkpointDir))
+        #self.checkpoint.restore(tf.train.latest_checkpoint(checkpointDir))
 
-        for epoch in range(141, self.epochs):
+        for epoch in range(self.epochs):
 
             print('Epoch Number {}'.format(epoch))
 
