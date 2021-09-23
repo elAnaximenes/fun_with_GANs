@@ -127,10 +127,11 @@ class Generator(tf.keras.Model):
 
 class GAN:
 
-    def __init__(self, generator, discriminator):
+    def __init__(self, generator, discriminator, resume=False):
 
         self.generator = generator
         self.discriminator = discriminator
+        self.resume = resume
 
         self.channels = 3 
         self.imageWidth = 200
@@ -140,10 +141,28 @@ class GAN:
         self.batchSize = 16 
         self.epochs = 10000 
 
+        self.weightsDir = './weights/'
+        self.generatorWeights = self.weightsDir + 'generator_weights'
+        self.discriminatorWeights = self.weightsDir + 'discriminator_weights'
+        
+        """
         self.checkpoint = tf.train.Checkpoint(generator_optimizer=self.generator.optimizer,
                                                 discriminator_optimizer=self.discriminator.optimizer,
                                                 generator=self.generator,
                                                 discriminator=self.discriminator)
+        """
+
+    def _save(self):
+
+        self.generator.save_weights(self.generatorWeights)
+        self.generator.save_weights(self.discriminatorWeights)
+
+    def _generate_images(self, epoch):
+
+    def _resume_training(self):
+
+        self.generator.load_weights(self.generatorWeights)
+        self.generator.load_weights(self.discriminatorWeights)
 
     def _generate_images(self, epoch):
 
@@ -185,8 +204,8 @@ class GAN:
 
     def train(self, dataset):
 
-        checkpointDir = './checkpoints/'
-        #self.checkpoint.restore(tf.train.latest_checkpoint(checkpointDir))
+        if self.resume:
+            self._resume_training()
 
         for epoch in range(self.epochs):
 
@@ -201,7 +220,7 @@ class GAN:
             self._generate_images(epoch + 1)
             if epoch %10 == 0:
 
-                self.checkpoint.save('./checkpoints/')
+                self._save()
 
             print('generator loss', genLoss)
             print('discriminator loss', discLoss, flush=True)

@@ -71,7 +71,7 @@ train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype('fl
 train_images = (train_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
 """
 
-def main(artistName):
+def main(artistName, resume):
 
     trainImages = get_artist_paintings(artistName)
     print(trainImages.shape, flush=True)
@@ -85,12 +85,18 @@ def main(artistName):
 
     discriminator = gan.Discriminator(inputShape)
     generator = gan.Generator(inputShape)
-    adversarialPair = gan.GAN(generator, discriminator)
+    adversarialPair = gan.GAN(generator, discriminator, resume)
 
     adversarialPair.train(trainDataset)
 
 if __name__ == '__main__':
 
+    resume = False
+    if len(sys.argv) > 1:
+        resume = True
+
     artistName = 'portrait_faces'
-    main(artistName)
+    main(artistName, resume)
+
+
 
