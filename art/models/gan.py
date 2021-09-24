@@ -142,6 +142,9 @@ class GAN:
         self.epochs = 10000 
 
         self.weightsDir = './weights/'
+        if not os.path.exists(self.weightsDir):
+            os.mkdir(self.weightsDir)
+
         self.generatorWeights = self.weightsDir + 'generator_weights'
         self.discriminatorWeights = self.weightsDir + 'discriminator_weights'
         
