@@ -33,12 +33,6 @@ def convert_row_to_image_data(row):
 
     image = np.array(image).reshape((256,256,3))
 
-    """
-    fig = plt.figure()
-    plt.imshow(image)
-    plt.show()
-    """
-
     return image
 
 def get_artist_paintings(artistName):
