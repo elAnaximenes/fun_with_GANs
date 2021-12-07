@@ -35,14 +35,14 @@ def convert_row_to_image_data(row):
 
     return image
 
-def get_artist_paintings(artistName):
+def get_images(datasetName):
 
-    paintingsFileName = os.path.join('../data/', '{}.csv'.format(artistName))
-    print('reading artist paintings {}'.format(artistName), flush=True)
+    datasetFileName = os.path.join('../data/', '{}.csv'.format(datasetName))
+    print('reading {} images...'.format(datasetName), flush=True)
 
     images = []
 
-    with open(paintingsFileName, 'r') as f:
+    with open(datasetFileName, 'r') as f:
 
         reader = csv.reader(f)
 
@@ -65,9 +65,9 @@ train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype('fl
 train_images = (train_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
 """
 
-def main(artistName, resume):
+def main(datasetName):
 
-    trainImages = get_artist_paintings(artistName)
+    trainImages = get_images(datasetName)
     print(trainImages.shape, flush=True)
 
     # Batch and shuffle the data
@@ -79,18 +79,18 @@ def main(artistName, resume):
 
     discriminator = gan.Discriminator(inputShape)
     generator = gan.Generator(inputShape)
-    adversarialPair = gan.GAN(generator, discriminator, resume)
+    adversarialPair = gan.GAN(generator, discriminator)
 
     adversarialPair.train(trainDataset)
 
 if __name__ == '__main__':
 
-    resume = False
-    if len(sys.argv) > 1:
-        resume = True
+    if len(sys.argv) < 2:
+        print("Usage: {} dataset_name".format(sys.argv[0]))
+        exit(2)
 
-    artistName = 'portrait_faces'
-    main(artistName, resume)
+    datasetName = sys.argv[1] 
+    main(datasetName)
 
 
 
