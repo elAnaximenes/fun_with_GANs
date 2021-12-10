@@ -13,27 +13,13 @@ class Discriminator(tf.keras.Model):
 
         self.inputLayer = layers.InputLayer(inputShape)
 
-        self.convLayer1 = layers.Conv2D(32, (5,5), strides=(2,2), padding='same')
+        self.convLayer1 = layers.Conv2D(64, (3,3), strides=(2,2), padding='same')
         self.reluLayer1 = layers.LeakyReLU()
-        self.dropoutLayer1 = layers.Dropout(0.3)
 
-        self.convLayer2 = layers.Conv2D(64, (5,5), strides=(2,2), padding='same')
+        self.convLayer2 = layers.Conv2D(128, (3,3), strides=(2,2), padding='same')
         self.reluLayer2 = layers.LeakyReLU()
-        self.dropoutLayer2 = layers.Dropout(0.3)
 
-        self.convLayer3 = layers.Conv2D(128, (5,5), strides=(2,2), padding='same')
-        self.reluLayer3 = layers.LeakyReLU()
-        self.dropoutLayer3 = layers.Dropout(0.3)
-
-        self.convLayer4 = layers.Conv2D(256, (5,5), strides=(2,2), padding='same')
-        self.reluLayer4 = layers.LeakyReLU()
-        self.dropoutLayer4 = layers.Dropout(0.3)
-
-        self.convLayer5 = layers.Conv2D(512, (5,5), strides=(2,2), padding='same')
-        self.reluLayer5 = layers.LeakyReLU()
-        self.dropoutLayer5 = layers.Dropout(0.3)
-
-        self.flattenLayer = layers.Flatten()
+        self.globalMaxPooling = layers.GlobalMaxPooling2D()
         self.outputLayer = layers.Dense(1)
 
         #self.cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
@@ -47,20 +33,9 @@ class Discriminator(tf.keras.Model):
         x = self.inputLayer(x)
         x = self.convLayer1(x)
         x = self.reluLayer1(x)
-        x = self.dropoutLayer1(x)
         x = self.convLayer2(x)
         x = self.reluLayer2(x)
-        x = self.dropoutLayer2(x)
-        x = self.convLayer3(x)
-        x = self.reluLayer3(x)
-        x = self.dropoutLayer3(x)
-        x = self.convLayer4(x)
-        x = self.reluLayer4(x)
-        x = self.dropoutLayer4(x)
-        x = self.convLayer5(x)
-        x = self.reluLayer5(x)
-        x = self.dropoutLayer5(x)
-        x = self.flattenLayer(x)
+        x = self.globalMaxPooling(x)
 
         return self.outputLayer(x)
 
@@ -80,32 +55,17 @@ class Generator(tf.keras.Model):
         super(Generator, self).__init__()
 
         self.inputLayer = layers.InputLayer(inputShape)
-        self.dense = layers.Dense(8*8*3, use_bias=False)
+        self.dense = layers.Dense(7*7*1, use_bias=False)
 
-        self.batchNormLayer1 = layers.BatchNormalization()
         self.reluLayer1 = layers.LeakyReLU()
-        self.reshape1 = layers.Reshape((8, 8, 3))
-        self.convLayer1 = layers.Conv2DTranspose(1024, (5, 5), strides=(1, 1), padding='same', use_bias=False)
+        self.reshape1 = layers.Reshape((7, 7, 1))
+        self.convLayer1 = layers.Conv2DTranspose(128, (4, 4), strides=(2, 2), padding='same', use_bias=False)
 
-        self.batchNormLayer2 = layers.BatchNormalization()
         self.reluLayer2 = layers.LeakyReLU()
-        self.convLayer2 = layers.Conv2DTranspose(512, (5, 5), strides=(2, 2), padding='same', use_bias=False)
+        self.convLayer2 = layers.Conv2DTranspose(128, (4, 4), strides=(2, 2), padding='same', use_bias=False)
 
-        self.batchNormLayer3 = layers.BatchNormalization()
         self.reluLayer3 = layers.LeakyReLU()
-        self.convLayer3 = layers.Conv2DTranspose(256, (5, 5), strides=(2, 2), padding='same', use_bias=False)
-
-        self.batchNormLayer4 = layers.BatchNormalization()
-        self.reluLayer4 = layers.LeakyReLU()
-        self.convLayer4 = layers.Conv2DTranspose(128, (5, 5), strides=(2, 2), padding='same', use_bias=False)
-        
-        self.batchNormLayer5 = layers.BatchNormalization()
-        self.reluLayer5 = layers.LeakyReLU()
-        self.convLayer5 = layers.Conv2DTranspose(64, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation='tanh')
-
-        self.batchNormLayer6 = layers.BatchNormalization()
-        self.reluLayer6 = layers.LeakyReLU()
-        self.convLayer6 = layers.Conv2DTranspose(3, (5, 5), strides=(2, 2), padding='same', use_bias=False, activation='tanh')
+        self.convLayer3 = layers.Conv2D(1, (7, 7), padding='same', activation='sigmoid')
 
         #self.cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         self.binaryCrossEntropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
@@ -117,25 +77,13 @@ class Generator(tf.keras.Model):
 
         x = self.inputLayer(x)
         x = self.dense(x)
-        x = self.batchNormLayer1(x, training=training) 
         x = self.reluLayer1(x)
         x = self.reshape1(x)
         x = self.convLayer1(x)
-        x = self.batchNormLayer2(x, training=training)
         x = self.reluLayer2(x)
         x = self.convLayer2(x)
-        x = self.batchNormLayer3(x, training=training)
         x = self.reluLayer3(x)
         x = self.convLayer3(x)
-        x = self.batchNormLayer4(x, training=training)
-        x = self.reluLayer4(x)
-        x = self.convLayer4(x)
-        x = self.batchNormLayer5(x, training=training)
-        x = self.reluLayer5(x)
-        x = self.convLayer5(x)
-        x = self.batchNormLayer6(x, training=training)
-        x = self.reluLayer6(x)
-        x = self.convLayer6(x)
 
         return x
 
@@ -180,7 +128,10 @@ class ConditionalGAN(tf.keras.Model):
 
     def _get_random_noise(self):
 
-        return tf.random.normal([self.numSamplesToGenerate, 100])
+        batchSize = 64 
+        latentDim = 128
+
+        return tf.random.normal(shape=(batchSize, latentDim))
 
     def _save(self):
 
@@ -212,11 +163,10 @@ class ConditionalGAN(tf.keras.Model):
 
         realImages, oneHots = batch 
         #noise = self.seed 
-        imageSize = 256
-        numClasses = 3
+        imageSize = 28 
+        numClasses = 10 
 
-
-        imageOneHots = oneHots[:, :]
+        imageOneHots = oneHots[:, :, None, None]
         imageOneHots = tf.repeat(imageOneHots, repeats=[imageSize*imageSize])
         imageOneHots = tf.reshape(imageOneHots, (-1, imageSize, imageSize, numClasses))
 

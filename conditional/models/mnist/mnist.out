@@ -1,0 +1,414 @@
+2021-12-06 19:05:58.769983: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory
+2021-12-06 19:05:58.770050: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+(69952, 28, 28, 1)
+(69952, 10)
+2021-12-06 19:06:01.652646: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2021-12-06 19:06:01.652756: W tensorflow/stream_executor/cuda/cuda_driver.cc:269] failed call to cuInit: UNKNOWN ERROR (303)
+2021-12-06 19:06:01.652825: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (quincunx): /proc/driver/nvidia/version does not exist
+2021-12-06 19:06:01.653464: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+<BatchDataset shapes: ((None, 28, 28, 1), (None, 10)), types: (tf.float32, tf.float32)>
+Initialized Discriminator...
+Initialized Generator...
+Epoch Number 0
+generator loss tf.Tensor(3.0181532, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.1572714, shape=(), dtype=float32)
+Epoch Number 1
+generator loss tf.Tensor(3.0285223, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.12478852, shape=(), dtype=float32)
+Epoch Number 2
+generator loss tf.Tensor(3.7394319, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.1537981, shape=(), dtype=float32)
+Epoch Number 3
+generator loss tf.Tensor(4.1520042, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.12806794, shape=(), dtype=float32)
+Epoch Number 4
+generator loss tf.Tensor(4.7592535, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.13682622, shape=(), dtype=float32)
+Epoch Number 5
+generator loss tf.Tensor(4.74601, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.13441364, shape=(), dtype=float32)
+Epoch Number 6
+generator loss tf.Tensor(3.9549277, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10531583, shape=(), dtype=float32)
+Epoch Number 7
+generator loss tf.Tensor(4.2495227, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.12715401, shape=(), dtype=float32)
+Epoch Number 8
+generator loss tf.Tensor(4.3574963, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08556391, shape=(), dtype=float32)
+Epoch Number 9
+generator loss tf.Tensor(3.7171903, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.19231258, shape=(), dtype=float32)
+Epoch Number 10
+generator loss tf.Tensor(4.387309, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.24300362, shape=(), dtype=float32)
+Epoch Number 11
+generator loss tf.Tensor(5.5368075, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.16028497, shape=(), dtype=float32)
+Epoch Number 12
+generator loss tf.Tensor(4.031192, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.2687661, shape=(), dtype=float32)
+Epoch Number 13
+generator loss tf.Tensor(5.300132, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10642815, shape=(), dtype=float32)
+Epoch Number 14
+generator loss tf.Tensor(5.077874, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.085663766, shape=(), dtype=float32)
+Epoch Number 15
+generator loss tf.Tensor(4.5577807, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08582804, shape=(), dtype=float32)
+Epoch Number 16
+generator loss tf.Tensor(5.2402196, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.15033284, shape=(), dtype=float32)
+Epoch Number 17
+generator loss tf.Tensor(4.267512, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.112190016, shape=(), dtype=float32)
+Epoch Number 18
+generator loss tf.Tensor(5.2252, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.1775858, shape=(), dtype=float32)
+Epoch Number 19
+generator loss tf.Tensor(4.7350616, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.1260708, shape=(), dtype=float32)
+Epoch Number 20
+generator loss tf.Tensor(5.0349455, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.14725193, shape=(), dtype=float32)
+Epoch Number 21
+generator loss tf.Tensor(4.5122356, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.12389131, shape=(), dtype=float32)
+Epoch Number 22
+generator loss tf.Tensor(4.2055864, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.152625, shape=(), dtype=float32)
+Epoch Number 23
+generator loss tf.Tensor(4.6586375, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.056363054, shape=(), dtype=float32)
+Epoch Number 24
+generator loss tf.Tensor(4.489912, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.20596626, shape=(), dtype=float32)
+Epoch Number 25
+generator loss tf.Tensor(4.1896157, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.14289382, shape=(), dtype=float32)
+Epoch Number 26
+generator loss tf.Tensor(6.2620087, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.14719018, shape=(), dtype=float32)
+Epoch Number 27
+generator loss tf.Tensor(4.81569, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.098845795, shape=(), dtype=float32)
+Epoch Number 28
+generator loss tf.Tensor(5.1410074, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.16996229, shape=(), dtype=float32)
+Epoch Number 29
+generator loss tf.Tensor(4.343322, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.106211014, shape=(), dtype=float32)
+Epoch Number 30
+generator loss tf.Tensor(4.602064, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10811624, shape=(), dtype=float32)
+Epoch Number 31
+generator loss tf.Tensor(5.3098807, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.17001075, shape=(), dtype=float32)
+Epoch Number 32
+generator loss tf.Tensor(6.0099754, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.117820725, shape=(), dtype=float32)
+Epoch Number 33
+generator loss tf.Tensor(4.5028977, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.2948035, shape=(), dtype=float32)
+Epoch Number 34
+generator loss tf.Tensor(5.0506496, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.0738785, shape=(), dtype=float32)
+Epoch Number 35
+generator loss tf.Tensor(5.7326417, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08320473, shape=(), dtype=float32)
+Epoch Number 36
+generator loss tf.Tensor(4.043691, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.18287122, shape=(), dtype=float32)
+Epoch Number 37
+generator loss tf.Tensor(4.380427, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.24364045, shape=(), dtype=float32)
+Epoch Number 38
+generator loss tf.Tensor(5.0888577, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.11274672, shape=(), dtype=float32)
+Epoch Number 39
+generator loss tf.Tensor(4.635069, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.17451368, shape=(), dtype=float32)
+Epoch Number 40
+generator loss tf.Tensor(4.9882717, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.14990145, shape=(), dtype=float32)
+Epoch Number 41
+generator loss tf.Tensor(5.9429092, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.09012937, shape=(), dtype=float32)
+Epoch Number 42
+generator loss tf.Tensor(5.265296, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.11833899, shape=(), dtype=float32)
+Epoch Number 43
+generator loss tf.Tensor(4.5697165, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10851236, shape=(), dtype=float32)
+Epoch Number 44
+generator loss tf.Tensor(5.088647, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.103798024, shape=(), dtype=float32)
+Epoch Number 45
+generator loss tf.Tensor(6.231926, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.18255512, shape=(), dtype=float32)
+Epoch Number 46
+generator loss tf.Tensor(6.6434774, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08086693, shape=(), dtype=float32)
+Epoch Number 47
+generator loss tf.Tensor(4.748108, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.1686712, shape=(), dtype=float32)
+Epoch Number 48
+generator loss tf.Tensor(5.4120464, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08665524, shape=(), dtype=float32)
+Epoch Number 49
+generator loss tf.Tensor(5.8638773, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.09834702, shape=(), dtype=float32)
+Epoch Number 50
+generator loss tf.Tensor(6.0198526, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08699196, shape=(), dtype=float32)
+Epoch Number 51
+generator loss tf.Tensor(4.9252625, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.0689982, shape=(), dtype=float32)
+Epoch Number 52
+generator loss tf.Tensor(3.9444957, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10234915, shape=(), dtype=float32)
+Epoch Number 53
+generator loss tf.Tensor(5.1131034, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.114418216, shape=(), dtype=float32)
+Epoch Number 54
+generator loss tf.Tensor(5.264455, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.064402, shape=(), dtype=float32)
+Epoch Number 55
+generator loss tf.Tensor(6.0306325, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.07517839, shape=(), dtype=float32)
+Epoch Number 56
+generator loss tf.Tensor(4.7925243, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.104239956, shape=(), dtype=float32)
+Epoch Number 57
+generator loss tf.Tensor(5.2801785, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.072761014, shape=(), dtype=float32)
+Epoch Number 58
+generator loss tf.Tensor(4.5285172, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10122383, shape=(), dtype=float32)
+Epoch Number 59
+generator loss tf.Tensor(6.171117, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.14297698, shape=(), dtype=float32)
+Epoch Number 60
+generator loss tf.Tensor(5.8357067, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.084018156, shape=(), dtype=float32)
+Epoch Number 61
+generator loss tf.Tensor(4.8424873, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.1086244, shape=(), dtype=float32)
+Epoch Number 62
+generator loss tf.Tensor(6.2171764, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.056691945, shape=(), dtype=float32)
+Epoch Number 63
+generator loss tf.Tensor(5.089997, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.13732556, shape=(), dtype=float32)
+Epoch Number 64
+generator loss tf.Tensor(5.2565613, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.09644987, shape=(), dtype=float32)
+Epoch Number 65
+generator loss tf.Tensor(5.335988, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.086619295, shape=(), dtype=float32)
+Epoch Number 66
+generator loss tf.Tensor(6.135248, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.094288915, shape=(), dtype=float32)
+Epoch Number 67
+generator loss tf.Tensor(5.1607485, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.09418945, shape=(), dtype=float32)
+Epoch Number 68
+generator loss tf.Tensor(5.6794224, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.052381814, shape=(), dtype=float32)
+Epoch Number 69
+generator loss tf.Tensor(5.141355, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.089521155, shape=(), dtype=float32)
+Epoch Number 70
+generator loss tf.Tensor(4.2715406, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10095486, shape=(), dtype=float32)
+Epoch Number 71
+generator loss tf.Tensor(5.667228, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08641604, shape=(), dtype=float32)
+Epoch Number 72
+generator loss tf.Tensor(6.180452, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.12044829, shape=(), dtype=float32)
+Epoch Number 73
+generator loss tf.Tensor(6.8342867, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.11399761, shape=(), dtype=float32)
+Epoch Number 74
+generator loss tf.Tensor(6.213889, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10274264, shape=(), dtype=float32)
+Epoch Number 75
+generator loss tf.Tensor(5.28941, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.09593147, shape=(), dtype=float32)
+Epoch Number 76
+generator loss tf.Tensor(4.601618, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.031661335, shape=(), dtype=float32)
+Epoch Number 77
+generator loss tf.Tensor(5.6587734, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.09992005, shape=(), dtype=float32)
+Epoch Number 78
+generator loss tf.Tensor(6.223906, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.12474105, shape=(), dtype=float32)
+Epoch Number 79
+generator loss tf.Tensor(5.5369897, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.101167165, shape=(), dtype=float32)
+Epoch Number 80
+generator loss tf.Tensor(6.442333, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.041950066, shape=(), dtype=float32)
+Epoch Number 81
+generator loss tf.Tensor(6.36026, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.09441946, shape=(), dtype=float32)
+Epoch Number 82
+generator loss tf.Tensor(6.6510496, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10795968, shape=(), dtype=float32)
+Epoch Number 83
+generator loss tf.Tensor(6.1517196, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.07682019, shape=(), dtype=float32)
+Epoch Number 84
+generator loss tf.Tensor(6.712284, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10471364, shape=(), dtype=float32)
+Epoch Number 85
+generator loss tf.Tensor(6.2135506, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.070022285, shape=(), dtype=float32)
+Epoch Number 86
+generator loss tf.Tensor(5.6286726, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08364725, shape=(), dtype=float32)
+Epoch Number 87
+generator loss tf.Tensor(6.619236, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.04148703, shape=(), dtype=float32)
+Epoch Number 88
+generator loss tf.Tensor(5.984064, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10387381, shape=(), dtype=float32)
+Epoch Number 89
+generator loss tf.Tensor(6.9453063, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.0642622, shape=(), dtype=float32)
+Epoch Number 90
+generator loss tf.Tensor(5.6941776, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.119704485, shape=(), dtype=float32)
+Epoch Number 91
+generator loss tf.Tensor(6.633091, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08556025, shape=(), dtype=float32)
+Epoch Number 92
+generator loss tf.Tensor(7.462701, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.116825156, shape=(), dtype=float32)
+Epoch Number 93
+generator loss tf.Tensor(7.0800753, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.06405018, shape=(), dtype=float32)
+Epoch Number 94
+generator loss tf.Tensor(5.687856, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.03244348, shape=(), dtype=float32)
+Epoch Number 95
+generator loss tf.Tensor(6.607008, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.10467144, shape=(), dtype=float32)
+Epoch Number 96
+generator loss tf.Tensor(6.427934, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08614397, shape=(), dtype=float32)
+Epoch Number 97
+generator loss tf.Tensor(5.458517, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.06935916, shape=(), dtype=float32)
+Epoch Number 98
+generator loss tf.Tensor(5.5172014, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08504926, shape=(), dtype=float32)
+Epoch Number 99
+generator loss tf.Tensor(6.7159624, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.11340225, shape=(), dtype=float32)
+Epoch Number 100
+generator loss tf.Tensor(6.108893, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.053329118, shape=(), dtype=float32)
+Epoch Number 101
+generator loss tf.Tensor(5.8731203, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.082270384, shape=(), dtype=float32)
+Epoch Number 102
+generator loss tf.Tensor(6.368693, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08203425, shape=(), dtype=float32)
+Epoch Number 103
+generator loss tf.Tensor(5.9134912, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.0784929, shape=(), dtype=float32)
+Epoch Number 104
+generator loss tf.Tensor(5.7873306, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.038305964, shape=(), dtype=float32)
+Epoch Number 105
+generator loss tf.Tensor(6.701457, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.037054576, shape=(), dtype=float32)
+Epoch Number 106
+generator loss tf.Tensor(6.0552, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08362642, shape=(), dtype=float32)
+Epoch Number 107
+generator loss tf.Tensor(6.0959797, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.13853195, shape=(), dtype=float32)
+Epoch Number 108
+generator loss tf.Tensor(6.6031466, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.116732195, shape=(), dtype=float32)
+Epoch Number 109
+generator loss tf.Tensor(7.022449, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.06255311, shape=(), dtype=float32)
+Epoch Number 110
+generator loss tf.Tensor(7.641556, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.1446162, shape=(), dtype=float32)
+Epoch Number 111
+generator loss tf.Tensor(6.4358344, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.11835645, shape=(), dtype=float32)
+Epoch Number 112
+generator loss tf.Tensor(6.8092027, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.07376817, shape=(), dtype=float32)
+Epoch Number 113
+generator loss tf.Tensor(6.3727136, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08594258, shape=(), dtype=float32)
+Epoch Number 114
+generator loss tf.Tensor(5.8625593, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.07806925, shape=(), dtype=float32)
+Epoch Number 115
+generator loss tf.Tensor(7.5353956, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.0867154, shape=(), dtype=float32)
+Epoch Number 116
+generator loss tf.Tensor(7.81773, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.091089815, shape=(), dtype=float32)
+Epoch Number 117
+generator loss tf.Tensor(5.469572, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.077768154, shape=(), dtype=float32)
+Epoch Number 118
+generator loss tf.Tensor(6.384802, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.104748785, shape=(), dtype=float32)
+Epoch Number 119
+generator loss tf.Tensor(5.3362293, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.07425695, shape=(), dtype=float32)
+Epoch Number 120
+generator loss tf.Tensor(6.323533, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.043781303, shape=(), dtype=float32)
+Epoch Number 121
+generator loss tf.Tensor(7.5601697, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.09733712, shape=(), dtype=float32)
+Epoch Number 122
+generator loss tf.Tensor(6.0472374, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.04570822, shape=(), dtype=float32)
+Epoch Number 123
+generator loss tf.Tensor(6.24594, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.070728764, shape=(), dtype=float32)
+Epoch Number 124
+generator loss tf.Tensor(6.93054, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.07088717, shape=(), dtype=float32)
+Epoch Number 125
+generator loss tf.Tensor(5.311516, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.06078819, shape=(), dtype=float32)
+Epoch Number 126
+generator loss tf.Tensor(7.092377, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.067206, shape=(), dtype=float32)
+Epoch Number 127
+generator loss tf.Tensor(6.6360316, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.08376834, shape=(), dtype=float32)
+Epoch Number 128
+generator loss tf.Tensor(6.951349, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.062639736, shape=(), dtype=float32)
+Epoch Number 129
+generator loss tf.Tensor(7.2995434, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.080075376, shape=(), dtype=float32)
+Epoch Number 130
+generator loss tf.Tensor(6.062232, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.12164946, shape=(), dtype=float32)
+Epoch Number 131
+generator loss tf.Tensor(6.2497163, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.095290706, shape=(), dtype=float32)
+Epoch Number 132
+generator loss tf.Tensor(7.2444315, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.078187585, shape=(), dtype=float32)
+Epoch Number 133
+generator loss tf.Tensor(5.856849, shape=(), dtype=float32)
+discriminator loss tf.Tensor(0.032298297, shape=(), dtype=float32)
