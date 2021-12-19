@@ -131,9 +131,9 @@ dmypy.json
 
 *.jpg
 *.csv
-plain_gan/data/datasets
-plain_gan/models/checkpoints
-plain_gan/models/weights
+plain/data/datasets
+plain/models/checkpoints
+plain/models/weights
 conditional/data/datasets
 conditional/models/conditional/checkpoints
 conditional/models/conditional/weights
