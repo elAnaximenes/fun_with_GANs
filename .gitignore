@@ -139,3 +139,5 @@ conditional/models/conditional/checkpoints
 conditional/models/conditional/weights
 conditional/models/mnist/weights
 conditional/models/mnist/checkpoints
+
+data/
