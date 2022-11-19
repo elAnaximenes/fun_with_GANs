@@ -1,5 +1,5 @@
 # root folder for dataset
-dataroot = "/Users/mjmnz/Repos/fun_with_GANs/data/celeba"
+dataroot = "/home/mark/Repos/fun_with_GANs/data/portrait/"
 
 # Number of workers for dataloader
 workers = 1
